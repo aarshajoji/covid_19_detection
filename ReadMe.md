@@ -1,1 +1,1 @@
-Covid 19 detection
+Covid 19 detection using python machine learning
