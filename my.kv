@@ -1,0 +1,345 @@
+<CreateAccountWindow>:
+    name: "create"
+
+    docid: docid
+    namee: namee
+    password: password
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Registration Page"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8}
+                text: "Doctor ID: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8}
+                size_hint: 0.4, 0.12
+                id:docid
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "Name: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13}
+                size_hint: 0.4, 0.12
+                id: namee
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Password: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13*2}
+                size_hint: 0.4, 0.12
+                id: password
+                multiline: False
+                password: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Submit"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.submit()
+<Admin>:
+    name: "create1"
+
+    password: passw
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Admin Login Page"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+
+
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Password: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13*2}
+                size_hint: 0.4, 0.12
+                id: passw
+                multiline: False
+                password: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.03}
+            size_hint: 0.3, 0.1
+            text: "AdminLogin"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.AdminLogin()
+
+        Button:
+            pos_hint:{"x":0.6,"y":0.03}
+            size_hint: 0.3, 0.1
+            text: "Home"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.home()
+<AdminDisplay>:
+    name: "addisp"
+    BoxLayout:
+        size_hint_y: 0.1
+        pos_hint: {"top":.9}
+        canvas.before:
+            Color:
+                rgba: .5,.5,.5,1
+            Line:
+                width: 2
+                rectangle: self.x,self.y,self.width,self.height
+        GridLayout:
+            cols:3
+
+            Label:
+                text: 'ID'
+
+            Label:
+                text: 'Name'
+            Label:
+                text: 'Password'
+    BoxLayout:
+        pos_hint: {"top":0.8}
+        RecycleView:
+            data: [{'text':"{}".format(id)} for id,name,password in root.rows]
+            viewclass: "Label"
+            RecycleBoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: .5,.5,.5,1
+                    Line:
+                        width: 2
+                        rectangle: self.x,self.y,self.width,self.height
+
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: "vertical"
+        RecycleView:
+            data: [{'text':"{}".format(name)} for id,name,password in root.rows]
+            viewclass: "Label"
+
+            RecycleBoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: .5,.5,.5,1
+                    Line:
+                        width: 2
+                        rectangle: self.x,self.y,self.width,self.height
+
+                default_size: None, dp(56)
+                orientation: "vertical"
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+        RecycleView:
+            data: [{'text':"{}".format(password)} for id,name,password in root.rows]
+            viewclass: "Label"
+            RecycleBoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: .5,.5,.5,1
+                    Line:
+                        width: 2
+                        rectangle: self.x,self.y,self.width,self.height
+                default_size: None, dp(56)
+                orientation: "vertical"
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+
+
+
+    Button:
+        #pos_hint:{"x":0.2,"y":0.05}
+        #size_hint: 0.6, 0.15
+        size_hint_y:0.1
+        text: "Log Out"
+        font_size: (root.width**2 + root.height**2) / 14**4
+        on_release:
+            root.manager.transition.direction = "left"
+            root.logout()
+
+
+<LoginWindow>:
+    name: "login"
+    docid: docid
+    password: password
+
+    FloatLayout:
+
+        Label:
+            text:"Doctor id:"
+            font_size:(root.width**2 + root.height**2) / 14**4
+            pos_hint: {"x":0.25, "top":0.92}
+            size_hint: 0.15, 0.15
+
+        TextInput:
+            id: docid
+            font_size: (root.width**2 + root.height**2) / 14**4
+            multiline: False
+            pos_hint: {"x": 0.45 , "top":0.9}
+            size_hint: 0.4, 0.10
+
+        Label:
+            text:"Password: "
+            font_size: (root.width**2 + root.height**2) / 14**4
+            pos_hint: {"x":0.25, "top":0.72}
+            size_hint: 0.15, 0.15
+
+        TextInput:
+            id: password
+            font_size: (root.width**2 + root.height**2) / 14**4
+            multiline: False
+            password: True
+            pos_hint: {"x": 0.45, "top":0.7}
+            size_hint: 0.4, 0.10
+
+        Button:
+            pos_hint:{"x":0.5,"y":0.2}
+            size_hint: 0.15, 0.1
+            font_size: (root.width**2 + root.height**2) / 13**4
+            text: "Login"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.loginBtn()
+
+        Button:
+            pos_hint:{"x":0.7,"y":0.4}
+            size_hint: 0.1, 0.05
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "New User?"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.createBtn()
+        Button:
+            pos_hint:{"x":0.5,"y":0.4}
+            size_hint: 0.1, 0.05
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Admin?"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.createBtn1()
+
+
+<MainWindow>:
+    name: "main"
+
+
+
+    BoxLayout:
+        cols:2
+        orientation: 'horizontal'
+
+
+        BoxLayout:
+            FileChooserIconView:
+                id: filechooser
+                on_selection: root.selected(filechooser.selection)
+
+        BoxLayout:
+            Image:
+                id: image
+                source: 'D:\image.png'
+                allow_stretch: True
+                halign: 'center'
+                valign: 'center'
+            Button:
+                pos_hint:{"x":.15,"y":0}
+                size_hint: 0.25, 0.05
+                text: "submit"
+                on_release:
+                    root.manager.transition.direction = "left"
+                    root.createDisp()
+                    root.show()
+
+            Button:
+                pos_hint:{"x":.15, "y": 0}
+                size_hint:0.25,0.05
+                text: "Log Out"
+                on_release:
+                    app.root.current = "login"
+                    root.manager.transition.direction = "left"
+
+
+
+<Display>:
+    name: "Disp"
+    tree: tree
+
+
+
+    FloatLayout:
+        cols:2
+
+        FloatLayout:
+
+            size: root.width, root.height/2
+
+            Button:
+                pos_hint:{"x":0.2,"y":0.05}
+                size_hint: 0.3, 0.1
+                text: "Check Another"
+                font_size: (root.width**2 + root.height**2) / 14**4
+                on_release:
+                    root.manager.transition.direction = "left"
+                    root.checkanother()
+            Button:
+                pos_hint:{"x":0.5,"y":0.05}
+                size_hint: 0.3, 0.1
+                text: "view"
+                font_size: (root.width**2 + root.height**2) / 14**4
+                on_release:
+                    root.manager.transition.direction = "left"
+                    root.view()
+            Label:
+                id: tree
+                #text:root.val
+                font_size: (root.width**2 + root.height**2) / 14**4
+                pos_hint: {"x":0.25, "top":0.72}
+                size_hint: 0.15, 0.15
+
+
+

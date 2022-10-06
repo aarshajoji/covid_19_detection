@@ -1,0 +1,31 @@
+ScreenManagement:
+    LoginPage:
+    UserPage:
+
+<LoginPage>:
+    name: "login_page"
+    BoxLayout:
+        Label:
+            text: "Login"
+            font_size: 20
+            halign: 'left'
+            valign: 'top'
+            color: [1,1,1,1]
+        TextInput:
+            id: login
+            size_hint: 0.8, 0.2
+            pos_hint: {"x":0.1, "top":1}
+        TextInput:
+            id: passw
+            password: True
+        Button:
+            text: "go"
+            text_size: 20,20
+            font_size: 10
+            on_release: root.verify_credentials()
+
+<UserPage>
+    name: "user"
+    Button:
+        text: "back"
+        on_release: app.root.current="login_page"
